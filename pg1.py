@@ -30,6 +30,7 @@ shape_y = HEIGHT - 100
 
 # Game loop
 while True:
+    t = pygame.time.get_ticks()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -48,7 +49,8 @@ while True:
             current_color = random.choice([RED, YELLOW, BLUE])
             shape_x = random.randint(50, WIDTH - 50)
             shape_y = HEIGHT - random.randint(100, 500)
-
+    if(t==50000):
+        break
     screen.fill((0, 0, 0))  # Clear the screen
 
     # Draw the current shape
@@ -60,8 +62,9 @@ while True:
         pygame.draw.circle(screen, current_color, (shape_x + 25, shape_y + 25), 25)
 
     # Display score
+    imp = pygame.image.load("icon.jpeg").convert()
+    screen.blit(imp, (200, 200))
     font = pygame.font.Font(None, 36)
     score_text = font.render("Score: " + str(score), True, (255, 255, 255))
     screen.blit(score_text, (20, 20))
-
     pygame.display.flip()
