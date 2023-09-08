@@ -62,8 +62,6 @@ while True:
         pygame.draw.circle(screen, current_color, (shape_x + 25, shape_y + 25), 25)
 
     # Display score
-    imp = pygame.image.load("icon.jpeg").convert()
-    screen.blit(imp, (200, 200))
     font = pygame.font.Font(None, 36)
     score_text = font.render("Score: " + str(score), True, (255, 255, 255))
     screen.blit(score_text, (20, 20))
