@@ -1,4 +1,3 @@
-# This is a sample Python script.
 import pygame
 import random
 from pygame import mixer  # for music
@@ -10,8 +9,13 @@ pygame.init()
 
 # create the screen
 screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
-full_screen_image = pygame.image.load('background_screen_image.jpeg')
+full_screen_image = pygame.image.load('bubblesort_game_screen_final.png')
 
+
+# Title and Icon
+pygame.display.set_caption("Bubble Sort")
+icon = pygame.image.load('Diamond_Block-MC-Square.png')
+pygame.display.set_icon(icon)
 
 # GameOver
 bg = pygame.image.load('End Screen.jpg')
@@ -68,7 +72,7 @@ def show_score(x, y, size, text_col):
 
 # Timer
 clock = pygame.time.Clock()
-start = 30
+start = 2599
 
 
 def show_timer(text, font, text_col):
@@ -76,16 +80,31 @@ def show_timer(text, font, text_col):
     screen.blit(timerImg, ((screen.get_width() - 130), 10))
 
 
-'''def show_randInt(font, text_col):
-    randIntImg = font.render( True, text_col)
-    screen.blit(randIntImg, (int(screen.get_width() / 2), 2))'''
 
 
 b_img_1 = 'blue_circle.png'
-b_img_2 = 'blue_hexagon.png'
-b_img_3 = 'blue_pentagon.png'
-b_img_4 = 'blue_triangle.png'
+b_img_2 = 'blue_square.png'
+b_img_3 = 'blue_hexagon.png'
+b_img_4 = 'blue_pentagon.png'
 b_img_5 = 'blue_rect.png'
+
+
+def show_randInt(i):
+    imgString = ""
+    if i == 1:
+        imgString = b_img_1
+    if i == 2:
+        imgString = b_img_2
+    if i == 3:
+        imgString = b_img_3
+    if i == 4:
+        imgString = b_img_4
+    if i == 5:
+        imgString = b_img_5
+    areaImage  =  Balloon((int)(screen.get_width()/2), -10, imgString)
+    areaImage.show_balloon()
+
+
 
 
 class Balloon:
@@ -99,22 +118,22 @@ class Balloon:
         screen.blit(self.balloonImg, (self.balloonX, self.balloonY))
 
 
-
+I = 1
 
 
 def b_choose():
     global I
-    shapes=[b_img_5,b_img_4,b_img_2,b_img_3,b_img_1]
-    I = random.choice(shapes)
-    if I == b_img_1:
+
+    I = random.randint(1, 5)
+    if I == 1:
         return b_img_1
-    if I == b_img_2:
+    if I == 2:
         return b_img_2
-    if I == b_img_3:
+    if I == 3:
         return b_img_3
-    if I == b_img_4:
+    if I == 4:
         return b_img_4
-    if I == b_img_5:
+    if I == 5:
         return b_img_5
 
 
@@ -265,7 +284,7 @@ while running:
         scaled_game_background = pygame.transform.scale(full_screen_image, (screen.get_width(), screen.get_height()))
         screen.blit(scaled_game_background, (0, 0))
         header_line = pygame.draw.line(screen, (0, 0, 0), (0, 35), (screen.get_width(), 35), 2)
-        #show_randInt( text_font1, (0, 0, 0))
+        show_randInt(I)
 
         # Stopping game loop when timer over
         if start < 0:
@@ -331,17 +350,16 @@ while running:
                 break
 
         show_balloons()
-        global I
 
-        if I == b_img_1:
+        if I == 1:
             tmp1 = b1_rect
-        if I == b_img_2:
+        if I == 2:
             tmp1 = b2_rect
-        if I == b_img_3:
+        if I == 3:
             tmp1 = b3_rect
-        if I == b_img_4:
+        if I == 4:
             tmp1 = b4_rect
-        if I == b_img_5:
+        if I == 5:
             tmp1 = b5_rect
 
         if player_rect.colliderect(tmp1):
@@ -402,20 +420,5 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_a or event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 playerX_change = 0
 
-    clock.tick(10)
+    clock.tick(100)
     pygame.display.update()
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
